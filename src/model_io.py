@@ -4,6 +4,8 @@ import dill as pkl
 from parameters import MODEL_BASE_DIR
 
 
+# TODO: write tests
+
 def get_current_date_as_str(fmt):
     date = datetime.datetime.now()
     return date.strftime(fmt)
