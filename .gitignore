@@ -1,0 +1,7 @@
+data/raw/*
+!data/raw/.gitinclude
+data/processed/*
+!data/processed/.gitinclude
+src/*.pyc
+models/*.pkl
+notebooks/.ipynb_checkpoints/*
