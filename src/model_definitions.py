@@ -12,14 +12,25 @@ import numpy as np
 
 ModelPackage = namedtuple('ModelPackage', 'name model param_grid')
 
-# TODO: make recursive
+def combine_pipeline_grids_(new_grid, prefix, grid):
+
+    for name, struct in grid.iteritems():
+
+        if isinstance(struct, dict): # name is step_name, struct is another grid
+            next_prefix = prefix + name + '__'
+            combine_pipeline_grids_(new_grid, next_prefix, struct)
+
+        else:                        # name is param_name, struct is params
+            param_name = name
+            params = struct
+            new_grid[prefix + param_name] = params
+            
+    return new_grid 
+
 def combine_pipeline_grids(step_name_grid_map):
     
     new_grid = dict()
-    for step_name, grid in step_name_grid_map.iteritems():
-        for param_name, params in grid.iteritems():
-            new_grid[step_name + '__' + param_name] = params
-            
+    combine_pipeline_grids_(new_grid, '', step_name_grid_map)
     return new_grid
 
 def make_tfidf_mode_pipeline(tfidf_vectorizer, tfidf_grid, estimator, estimator_grid):
