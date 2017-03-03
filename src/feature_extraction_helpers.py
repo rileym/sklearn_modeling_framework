@@ -1,4 +1,5 @@
-class DfFeatureUnion(BaseEstimator, TransformerMixin):
+from sklearn.pipeline import FeatureUnion
+class DfFeatureUnion(FeatureUnion):
 
     def __init__(self, df_transformers):
         self.df_transformers = df_transformers

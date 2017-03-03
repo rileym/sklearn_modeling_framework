@@ -1,6 +1,5 @@
 from sklearn.pipeline import Pipeline
-from feature_extraction_helpers import DfFeatureUnion for transformer in self.df_transformers), axis = 1)
-
+from feature_extraction_helpers import DfUnion
 import six
 import abc
 
