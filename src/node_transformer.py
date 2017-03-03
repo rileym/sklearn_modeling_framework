@@ -1,11 +1,11 @@
 from sklearn.pipeline import Pipeline
-from feature_extraction_helpers import DfFeatureUnion for transformer in self.df_transformers), axis = 1)
+from feature_extraction_helpers import DfFeatureUnion
 
 import six
 import abc
 
 @six.add_metaclass(abc.ABCMeta)
-class TransformerNode(object):
+class PipelineNode(object):
 
     @property
     def name(self):
@@ -20,7 +20,7 @@ class TransformerNode(object):
         pass
 
 # TODO: verity atomic_transformer in transformer
-class AtomicTransformerNode(TransformerNode):
+class AtomicTransformerNode(PipelineNode):
     
     def __init__(self, name, atomic_transformer, parameter_grid = None):
         self._name = name
@@ -39,8 +39,7 @@ class AtomicTransformerNode(TransformerNode):
     def transformer(self):
         return self._atomic_transformer
 
-six.add_metaclass(abc.ABCMeta)
-class CompositeTransformerNode(TransformerNode):
+class CompositeTransformerNode(PipelineNode):
     
 
     def __init__(self, name, children, combiner_cls):
@@ -93,9 +92,10 @@ class PipelineCompositeTransformerNode(CompositeTransformerNode):
 class UnionCompositeTransformerNode(CompositeTransformerNode):
 
     def __init__(self, name, children):
-        super(UnionCompositeTransformerNode, self).__init__(name, children, DfUnion)
+        super(UnionCompositeTransformerNode, self).__init__(name, children, DfFeatureUnion)
 
 
 
 
 if __name__ == '__main__':
+    pass
